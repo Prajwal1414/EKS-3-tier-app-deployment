@@ -1,4 +1,4 @@
-###Provision the infrastructure using these commands
+## Provision the infrastructure using these commands
 
 > **Note:** You should configure your aws credentials in your console using `aws configure` before running these commands.
 
