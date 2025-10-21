@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: wanderlust
+data:
+  key: value
+  REDIS_URL: 'redis://redis-service:6379'
+  PORT: '8080'
+  FRONTEND_URL: 'https://wanderlust.prajwalkumar.co.in'
+  ACCESS_COOKIE_MAXAGE: '900000' # 15 minutes
+  ACCESS_TOKEN_EXPIRES_IN: '15m'
+  REFRESH_COOKIE_MAXAGE: '604800000' # 7 days
+  REFRESH_TOKEN_EXPIRES_IN: '7d'
+  NODE_ENV: 'production'

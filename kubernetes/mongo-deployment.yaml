@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-statefulset
+  namespace: wanderlust
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: mongo-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:6.0
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+          resources:
+            requests:
+              cpu: '500m'
+              memory: '1Gi'
+            limits:
+              cpu: '500m'
+              memory: '1Gi'
+          env:
+            - name: MONGO_INITDB_DATABASE
+              value: 'wanderlust'
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-data
+      spec:
+        storageClassName: ebs-sc
+        accessModes: ['ReadWriteOnce']
+        resources:
+          requests:
+            storage: 1Gi

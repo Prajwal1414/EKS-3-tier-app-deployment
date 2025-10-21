@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: wanderlust
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '80'
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: prajwalkumar1453/frontend-eks:v1
+          ports:
+            - containerPort: 80
+          env:
+            - name: VITE_API_PATH
+              value: 'https://wanderlust-api.prajwalkumar.co.in'
+          resources:
+            requests:
+              cpu: '250m'
+              memory: '250Mi'
+            limits:
+              cpu: '550m'
+              memory: '550Mi'

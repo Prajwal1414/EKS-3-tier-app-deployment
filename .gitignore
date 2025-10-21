@@ -1,0 +1,54 @@
+frontend/node_modules
+frontend/.env.local
+backend/.env
+backend/node_modules
+kubernetes/jenkinsssh
+kubernetes/jenkinsssh.pub
+kubernetes/ingress-argocd.yaml
+kubernetes/kind-argocd.yaml
+/node_modules
+coverage/
+.idea/
+terraform/destroy.out
+terraform/plan.out
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/
+# --- Terraform ---
+# Local .terraform directories
+**/.terraform/*
+.terraform/
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+
+# Backup & override files
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration
+.terraformrc
+terraform.rc
+
+# Provider plugins / binaries
+terraform/providers/
+terraform/.terraform/
+
+# Any provider executables (sometimes large)
+terraform/**/*.zip
+terraform/**/*.exe
+terraform/**/*.tar.gz
+terraform/**/*.bin
+terraform/**/*.x*
+
+# Lock file (optional — keep if you want reproducible versions)
+# .terraform.lock.hcl
+

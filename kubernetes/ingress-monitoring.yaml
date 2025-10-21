@@ -1,0 +1,56 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: private-ingress
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: external-nginx
+    nginx.ingress.kubernetes.io/whitelist-source-range: '10.0.0.0/16'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - grafana.prajwalkumar.co.in
+      secretName: grafana-tls
+    - hosts:
+        - prometheus.prajwalkumar.co.in
+      secretName: prometheus-tls
+  ingressClassName: external-nginx
+  rules:
+    - host: grafana.prajwalkumar.co.in
+      http:
+        paths:
+          - path: /.well-known/acme-challenge
+            pathType: Prefix
+            backend:
+              service:
+                name: cm-acme-http-solver-g2fvm # This gets created by cert-manager
+                port:
+                  number: 8089
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus-grafana
+                port:
+                  number: 80
+    - host: prometheus.prajwalkumar.co.in
+      http:
+        paths:
+          - path: /.well-known/acme-challenge
+            pathType: Prefix
+            backend:
+              service:
+                name: cm-acme-http-solver-vgn56 # This gets created by cert-manager
+                port:
+                  number: 8089
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus-kube-prometheus-prometheus
+                port:
+                  number: 9090

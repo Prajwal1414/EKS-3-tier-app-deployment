@@ -1,0 +1,9 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+  namespace: wanderlust
+  annotations:
+    storageclass.kubernetes.io/is-default-class: 'true' # Set to "true" if you want this as default
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
