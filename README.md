@@ -127,9 +127,12 @@ The CI/CD process is automated through a Jenkins pipeline, handling everything f
 
 > **Note:** Architecture diagrams are available in both png and svg formats. 
 
-> [!CAUTION] DOMAIN DEPENDENCY REQUIRED
+> [!CAUTION]
+> DOMAIN DEPENDENCY REQUIRED
 > This architecture is configured for a **custom domain** (`app.mydomain.co.in`) and relies heavily on **Cert-Manager** to provision HTTPS certificates via Let's Encrypt.
 >
 > If you clone this repository and attempt to run the CI/CD pipeline:
 > 1.  You **must** provision a real domain (or sub-domain) and update all Kubernetes manifests (`ingress.yaml`, `ingress-monitoring.yaml`) and your Terraform configuration to match.
 > 2.  Attempting to use a fake domain will cause **Cert-Manager** to fail its challenge, and the application will remain inaccessible over HTTPS.
+>
+> Also make sure you delete the infrastructure by using `terraform destroy`. Make sure NAT gateway, any elastic IPs, EKS cluster, worker nodes, volumes are all deleted or else AWS continues to charge you. 
