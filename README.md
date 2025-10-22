@@ -6,10 +6,10 @@ This project details the **DevOps** and **Cloud Engineering** practices used to 
 
 ## 📋 Table of Contents
 
-- [AWS EKS Architecture & Networking](#-aws-eks-architecture--networking)
-- [Security & Access Control](#-security--access-control)
-- [CI/CD Pipeline with Jenkins](#-cicd-pipeline-with-jenkins)
-- [Observability & Scaling](#-observability--scaling)
+- [AWS EKS Architecture & Networking](#1-️-aws-eks-architecture--networking)
+- [Security & Access Control](#2-️-security--access-control)
+- [CI/CD Pipeline with Jenkins](#3-️-cicd-pipeline-with-jenkins)
+- [Observability & Scaling](#4--observability--scaling)
 
 ---
 
